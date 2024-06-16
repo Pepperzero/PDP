@@ -19,6 +19,8 @@
 //   });
 // });
 
+//////// Swipers
+
 $(".slider_component").each(function (index) {
   const swiper = new Swiper($(this).find(".swiper")[0], {
     effect: "fade",
@@ -58,6 +60,58 @@ $(".cards_component").each(function (index) {
     },
   });
 });
+
+////////// Text animation on scroll
+
+// Split text into spans
+let typeSplit = new SplitType("[text-split]", {
+  //types: "words, chars",
+  types: "words",
+  tagName: "span",
+});
+
+// Link timelines to scroll position
+function createScrollTrigger(triggerElement, timeline) {
+  // Reset tl when scroll out of view past bottom of screen
+  ScrollTrigger.create({
+    trigger: triggerElement,
+    start: "top bottom",
+    onLeaveBack: () => {
+      timeline.progress(0);
+      timeline.pause();
+    },
+  });
+  // Play tl when scrolled into view (95% from top of screen)
+  ScrollTrigger.create({
+    trigger: triggerElement,
+    start: "top 95%",
+    onEnter: () => timeline.play(),
+  });
+}
+
+function animateWords() {
+  $("[txt-animation]").each(function (index) {
+    let tl = gsap.timeline({ paused: true });
+    tl.fromTo(
+      $(this).find(".word"),
+      {
+        opacity: 0,
+        y: "1em",
+      },
+      {
+        opacity: 1,
+        y: "0em",
+        duration: 0.6,
+        ease: "power1.out",
+        delay: 0.2, // slight delay to start the animation
+        stagger: { amount: 0.4 },
+      }
+    );
+    createScrollTrigger($(this), tl);
+  });
+}
+
+animateWords();
 /*
 
     effect: "coverflow",
