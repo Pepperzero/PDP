@@ -40,6 +40,24 @@ $(".slider_component").each(function (index) {
   });
 });
 
+$(".cards_component").each(function (index) {
+  const swiper = new Swiper($(this).find(".swiper")[0], {
+    //effect: "fade",
+    //crossFade: true,
+    slidesPerView: 1,
+    spaceBetween: 24,
+    speed: 800,
+    centerInsufficientSlides: true,
+    //loop: true,
+    breakpoints: {
+      // when it gets bigger than 478px
+      478: {
+        slidesPerView: 3,
+        spaceBetween: 24,
+      },
+    },
+  });
+});
 /*
 
     effect: "coverflow",
