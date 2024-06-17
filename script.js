@@ -1,24 +1,5 @@
 //alert("it works");
 
-// $(".slider_component").each(function (index) {
-//   const swiper = new Swiper($(this).find(".swiper")[0], {
-//     slidesPerView: 1,
-//     spaceBetween: 0,
-//     speed: 500,
-//     centerInsufficientSlides: true,
-//     loop: true,
-//     autoplay: {
-//       delay: 6000,
-//       disableOnInteraction: false,
-//     },
-//     navigation: {
-//       nextEl: $(this).find(".swiper-next")[0],
-//       prevEl: $(this).find(".swiper-prev")[0],
-//       disabledClass: "is-disabled",
-//     },
-//   });
-// });
-
 //////// Swipers
 
 $(".slider_component").each(function (index) {
@@ -112,55 +93,60 @@ function animateWords() {
 }
 
 animateWords();
-/*
 
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    //slideShadows: false,
-    loop: true,
-    speed: 1200,
-    autoplay: {
-      delay: 6000,
-      disableOnInteraction: false,
-    },
-    coverflowEffect: {
-      rotate: 0,
-      stretch: -96,
-      depth: 100,
-      modifier: 1,
-      slideShadows: true,
-    },
+//////// Dropdown functionality
 
-// Initialize Galeria Swiper de paginas externas
-function initializeTeachersSwiper() {
-  $(".slider-galeria_component").each(function (index) {
+// const items = document.querySelectorAll(".accordion button");
 
-    const swiper4 = new Swiper($(this).find(".swiper")[0], {
+// function toggleAccordion() {
+//   const itemToggle = this.getAttribute("aria-expanded");
 
-      slidesPerView: 1,
-      spaceBetween: 0,
-      speed: 500,
-      centerInsufficientSlides: true,
-      loop: true,
-      autoplay: {
-        delay: 6000,
-        disableOnInteraction: false,
-      },
-      breakpoints: {
-        // when it gets bigger than 478px
-        478: {
-          slidesPerView: 3
-        },
-      },
-      navigation: {
-        nextEl: $(this).find(".swiper-next")[0],
-        prevEl: $(this).find(".swiper-prev")[0],
-        disabledClass: "is-disabled"
-      },
-    });
-  })
-}
-setTimeout(initializeTeachersSwiper, 1000);
-*/
+//   for (i = 0; i < items.length; i++) {
+//     items[i].setAttribute("aria-expanded", "false");
+//   }
+
+//   if (itemToggle == "false") {
+//     this.setAttribute("aria-expanded", "true");
+//   }
+// }
+
+// items.forEach((item) => item.addEventListener("click", toggleAccordion));
+
+// const items = $(".accordion button");
+
+// function toggleAccordion() {
+//   //const $this = $(this);
+//   const itemToggle = this.attr("aria-expanded");
+
+//   items.attr("aria-expanded", "false");
+
+//   if (itemToggle == "false") {
+//     this.attr("aria-expanded", "true");
+//   }
+// }
+
+// items.on("click", toggleAccordion);
+
+$("[dropdown]").on("click", function () {
+  // Find the parent .being_item
+  var parentItem = $(this).closest(".being_item");
+
+  // Find the .dropdown_component within this parent
+  var dropdownComponent = parentItem.find(".dropdown_component");
+
+  console.log("clicked");
+  // Toggle the height
+  // if (dropdownComponent.height() === 0) {
+  //   dropdownComponent.css("height", "auto");
+  // } else {
+  //   dropdownComponent.css("height", "0");
+  // }
+  if (dropdownComponent.height() === 0) {
+    dropdownComponent.css("height", "auto");
+    var autoHeight = dropdownComponent.height();
+    dropdownComponent.css("height", "0");
+    dropdownComponent.animate({ height: autoHeight }, 300);
+  } else {
+    dropdownComponent.animate({ height: 0 }, 300);
+  }
+});
