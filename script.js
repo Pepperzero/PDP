@@ -27,15 +27,22 @@ $(".cards_component").each(function (index) {
   const swiper = new Swiper($(this).find(".swiper")[0], {
     //effect: "fade",
     //crossFade: true,
-    slidesPerView: 1,
+    slidesPerView: 1.4,
+    initialSlide: 1,
+    centeredSlides: true,
+    centerInsufficientSlides: true,
+    slideActiveClass: "is-active",
     spaceBetween: 24,
     speed: 800,
-    centerInsufficientSlides: true,
     //loop: true,
     breakpoints: {
       // when it gets bigger than 478px
       478: {
+        enabled: false,
+        centeredSlides: true,
         slidesPerView: 3,
+        initialSlide: 1,
+        //slidesPerGroup: 3,
         spaceBetween: 24,
       },
     },
@@ -171,7 +178,7 @@ $("[dropdown]").on("click", function () {
 //   }
 // });
 
-//Menu animation
+/////// DROPDOWN TIME
 window.addEventListener("DOMContentLoaded", (event) => {
   let drop = $(".time_distance-wrap");
 
@@ -180,8 +187,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let dropContent = $(this).find(".time_distance-cards");
     let dropImage = $(this).find(".time_distance_img-wrap");
     let dropInfo = $(this).find(".timer_distance_txt_inner-wrap");
-    // let menuBackground = $(".menu_background");
-    // let lines = $(".nav_button_line");
+
+    let mm = gsap.matchMedia();
 
     let openDropdown = gsap.timeline({
       paused: true,
@@ -197,37 +204,77 @@ window.addEventListener("DOMContentLoaded", (event) => {
         dropTrigger.attr("aria-label", "Close Main Menu");
       },
     });
-    openDropdown.to(dropImage, {
-      height: 0,
-      autoAlpha: 0,
-      display: "none",
-    });
-    openDropdown.to(
-      dropInfo,
-      {
+
+    mm.add("(min-width: 480px)", () => {
+      // desktop setup code here...
+      openDropdown.to(dropImage, {
         height: 0,
         autoAlpha: 0,
         display: "none",
-      },
-      "<"
-    );
-    openDropdown.to(
-      dropTrigger,
-      {
-        //duration: 0.2,
-        height: "6.6rem",
-      },
-      "<"
-    );
-    openDropdown.to(
-      dropContent,
-      {
-        height: "auto",
-        autoAlpha: 1,
-        display: "block",
-      }
-      //"<"
-    );
+      });
+      openDropdown.to(
+        dropInfo,
+        {
+          height: 0,
+          autoAlpha: 0,
+          display: "none",
+        },
+        "<"
+      );
+      openDropdown.to(
+        dropTrigger,
+        {
+          //duration: 0.2,
+          height: "6.6rem",
+        },
+        "<"
+      );
+      openDropdown.to(
+        dropContent,
+        {
+          height: "auto",
+          autoAlpha: 1,
+          display: "block",
+        }
+        //"<"
+      );
+    });
+
+    mm.add("(max-width: 479px)", () => {
+      // mobile setup code here...
+      // openDropdown.to(dropImage, {
+      //   height: 0,
+      //   autoAlpha: 0,
+      //   display: "none",
+      // });
+      openDropdown.to(
+        dropInfo,
+        {
+          height: 0,
+          autoAlpha: 0,
+          display: "none",
+        },
+        "<"
+      );
+      openDropdown.to(
+        dropTrigger,
+        {
+          //duration: 0.2,
+          height: "15.4rem",
+        },
+        "<"
+      );
+      openDropdown.to(
+        dropContent,
+        {
+          height: "auto",
+          autoAlpha: 1,
+          display: "block",
+        }
+        //"<"
+      );
+    });
+
     // openDropdown.from(dropContent, { y: "-100%" }, '-=50%');
     // openDropdown.from(menuBackground, { opacity: 0 }, "<");
     // openDropdown.to(lines.eq(0), { y: 4, rotate: 45 }, "<");
