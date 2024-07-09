@@ -296,3 +296,69 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // });
   });
 });
+
+/////////// MENU ANIMATION
+window.addEventListener("DOMContentLoaded", (event) => {
+  let navButton = $(".navbar_btn_lines");
+  let menuWrap = $(".menu_wrap");
+  let menuBackground = $(".menu_panel");
+  let menuLinks = $(".menu_link");
+
+  let showMainMenu = gsap.timeline({
+    paused: true,
+    defaults: {
+      duration: 1,
+      ease: "power2.inOut",
+    },
+    onReverseComplete: () => {
+      navButton.attr("aria-label", "Open Main Menu");
+    },
+    onComplete: () => {
+      menuWrap.find("button").first().focus();
+      navButton.attr("aria-label", "Close Main Menu");
+    },
+  });
+  showMainMenu.set(menuWrap, { display: "block" });
+  //showMainMenu.set(menuBackground, { display: "flex" }, "<");
+  showMainMenu.from(menuWrap, { autoAlpha: 0, opacity: 0 }, "<");
+  showMainMenu.from(menuBackground, { opacity: 0 }, "<");
+  showMainMenu.from(menuLinks, { y: "100%", stagger: 0.1, opacity: 0 }, "<");
+  showMainMenu.to(
+    "[navbar-color='dark']",
+    { attr: { "navbar-color": "light" } },
+    "<"
+  );
+
+  navButton.on("click", function () {
+    if (showMainMenu.progress() === 0) {
+      showMainMenu.play();
+    } else {
+      showMainMenu.reverse();
+      navButton.attr("aria-label", "Open Main Menu");
+    }
+  });
+
+  menuBackground.on("click", function () {
+    showMainMenu.reverse();
+  });
+  $(document).on("keydown", function (e) {
+    if (e.key === "Escape") showMainMenu.reverse();
+  });
+});
+
+//////// MENU SCROLL TRIGGER
+gsap.registerPlugin(ScrollTrigger);
+
+let logo = $(".nav_logo_wrap");
+let page = $(".page_wrapper");
+
+gsap.to(logo, {
+  scrollTrigger: {
+    trigger: page,
+    start: "top top",
+    end: "top 80px",
+    scrub: true,
+    //markers: true,
+  },
+  width: "5rem",
+});
