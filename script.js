@@ -324,10 +324,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
   showMainMenu.from(menuBackground, { opacity: 0 }, "<");
   showMainMenu.from(menuLinks, { y: "100%", stagger: 0.1, opacity: 0 }, "<");
   showMainMenu.to(
-    "[navbar-color='dark']",
-    { attr: { "navbar-color": "light" } },
+    "html",
+    {
+      ["--navbar-menu--text"]: "#ffffff",
+      ["--navbar-menu--button-txt"]: "#ffffff",
+      ["--navbar-menu--button-outline"]: "#ffffff",
+      ["--navbar-menu--button-bg-hover"]: "#ffffff",
+      ["--navbar-menu--button-txt-hover"]: "#59514d",
+    },
     "<"
   );
+  // showMainMenu.to(
+  //   "[navbar-color='dark']",
+  //   { attr: { "navbar-color": "light" } },
+  //   "<"
+  // );
 
   navButton.on("click", function () {
     if (showMainMenu.progress() === 0) {
@@ -351,14 +362,38 @@ gsap.registerPlugin(ScrollTrigger);
 
 let logo = $(".nav_logo_wrap");
 let page = $(".page_wrapper");
+let navbar = $(".nav_wrap");
 
-gsap.to(logo, {
+let scrollTl = gsap.timeline({
+  defaults: {
+    duration: 1,
+    ease: "power2.inOut",
+  },
   scrollTrigger: {
     trigger: page,
-    start: "top top",
-    end: "top 80px",
-    scrub: true,
-    //markers: true,
+    start: "320px 100px", // [trigger] [scroller] positions
+    //end: "320px 100px", // [trigger] [scroller] positions
+    //scrub: true,
+    toggleActions: "play none none reverse",
+    markers: true,
   },
-  width: "5rem",
 });
+
+scrollTl.to(logo, { width: "5rem" });
+scrollTl.to($(".nav_wrap"), { backgroundColor: "#e0d7d0" }, "<");
+scrollTl.to(
+  "html",
+  {
+    ["--navbar-menu--text"]: "#59514d",
+    ["--navbar-menu--button-txt"]: "#59514d",
+    ["--navbar-menu--button-outline"]: "#59514d",
+    ["--navbar-menu--button-bg-hover"]: "#59514d",
+    ["--navbar-menu--button-txt-hover"]: "#ffffff",
+  },
+  "<"
+);
+
+// --navbar-menu--button-outline: var(--base-color-neutral--brown-dark);
+//   --navbar-menu--button-txt: var(--base-color-neutral--brown-dark);
+//   --navbar-menu--button-bg-hover: var(--base-color-neutral--brown-dark);
+// 	--navbar-menu--button-txt-hover: var(--base-color-neutral--white);
