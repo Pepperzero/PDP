@@ -27,12 +27,12 @@ $(".cards_component").each(function (index) {
   const swiper = new Swiper($(this).find(".swiper")[0], {
     //effect: "fade",
     //crossFade: true,
-    slidesPerView: 1.4,
+    slidesPerView: 1.2,
     initialSlide: 1,
     centeredSlides: true,
     centerInsufficientSlides: true,
     slideActiveClass: "is-active",
-    spaceBetween: 24,
+    spaceBetween: 12,
     speed: 800,
     //loop: true,
     breakpoints: {
@@ -44,6 +44,32 @@ $(".cards_component").each(function (index) {
         initialSlide: 1,
         //slidesPerGroup: 3,
         spaceBetween: 24,
+      },
+    },
+  });
+});
+
+$(".history_slider_component").each(function (index) {
+  const swiper = new Swiper($(this).find(".swiper")[0], {
+    //effect: "fade",
+    //crossFade: true,
+    slidesPerView: 1.2,
+    //initialSlide: 1,
+    //centeredSlides: true,
+    //centerInsufficientSlides: true,
+    //slideActiveClass: "is-active",
+    spaceBetween: 16,
+    slideToClickedSlide: true,
+    speed: 800,
+    //loop: true,
+    breakpoints: {
+      // when it gets bigger than 478px
+      478: {
+        centeredSlides: true,
+        slidesPerView: 1.2,
+        //initialSlide: 1,
+        //slidesPerGroup: 3,
+        spaceBetween: 16,
       },
     },
   });
@@ -375,7 +401,7 @@ let scrollTl = gsap.timeline({
     //end: "320px 100px", // [trigger] [scroller] positions
     //scrub: true,
     toggleActions: "play none none reverse",
-    markers: true,
+    //markers: true,
   },
 });
 
