@@ -389,6 +389,8 @@ gsap.registerPlugin(ScrollTrigger);
 let logo = $(".nav_logo_wrap");
 let page = $(".page_wrapper");
 let navbar = $(".nav_wrap");
+let menuLines = $(".navbar_separation-line");
+let payoff = $(".navbar_payoff-txt");
 
 let scrollTl = gsap.timeline({
   defaults: {
@@ -406,7 +408,10 @@ let scrollTl = gsap.timeline({
 });
 
 scrollTl.to(logo, { width: "5rem" });
-scrollTl.to($(".nav_wrap"), { backgroundColor: "#e0d7d0" }, "<");
+scrollTl.to(navbar, { backgroundColor: "#e0d7d0", height: "4.5rem" }, "<");
+scrollTl.to(menuLines, { autoAlpha: 0, opacity: 0 }, "<");
+scrollTl.to(payoff, { autoAlpha: 0, opacity: 0 }, "<");
+scrollTl.to($(".navbar_btn_wrap"), { marginBottom: "0rem", y: "-1rem" }, "<");
 scrollTl.to(
   "html",
   {
