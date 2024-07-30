@@ -323,6 +323,32 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
 });
 
+/////////// MENU DARK OR LIGHT
+$(document).ready(function () {
+  if ($(".page-wrapper").attr("navbar-color") === "dark") {
+    document.documentElement.style.setProperty(
+      "--navbar-menu--text",
+      "#59514d"
+    );
+    document.documentElement.style.setProperty(
+      "--navbar-menu--button-txt",
+      "#59514d"
+    );
+    document.documentElement.style.setProperty(
+      "--navbar-menu--button-outline",
+      "#59514d"
+    );
+    document.documentElement.style.setProperty(
+      "--navbar-menu--button-bg-hover",
+      "#59514d"
+    );
+    document.documentElement.style.setProperty(
+      "--navbar-menu--button-txt-hover",
+      "#ffffff"
+    );
+  }
+});
+
 /////////// MENU ANIMATION
 window.addEventListener("DOMContentLoaded", (event) => {
   let navButton = $(".navbar_btn_lines");
