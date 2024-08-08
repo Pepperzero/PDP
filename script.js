@@ -75,6 +75,27 @@ $(".history_slider_component").each(function (index) {
   });
 });
 
+$(".home-slider_component").each(function (index) {
+  const swiper = new Swiper($(this).find(".swiper")[0], {
+    effect: "fade",
+    crossFade: true,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    speed: 1200,
+    centerInsufficientSlides: true,
+    loop: true,
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: $(this).find(".swiper-next")[0],
+      prevEl: $(this).find(".swiper-prev")[0],
+      disabledClass: "is-disabled",
+    },
+  });
+});
+
 ////////// Text animation on scroll
 
 // Split text into spans
