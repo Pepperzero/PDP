@@ -85,7 +85,7 @@ $(".home-slider_component").each(function (index) {
     centerInsufficientSlides: true,
     loop: true,
     autoplay: {
-      delay: 6000,
+      delay: 4000,
       disableOnInteraction: false,
     },
     navigation: {
