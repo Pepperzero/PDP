@@ -475,3 +475,37 @@ scrollTl.to(
 //   --navbar-menu--button-txt: var(--base-color-neutral--brown-dark);
 //   --navbar-menu--button-bg-hover: var(--base-color-neutral--brown-dark);
 // 	--navbar-menu--button-txt-hover: var(--base-color-neutral--white);
+
+///////// SCROLLTRIGGER ANIMATION
+gsap.registerPlugin(ScrollTrigger);
+
+// Link timelines to scroll position
+function createScrollTrigger(triggerElement, timeline) {
+  // Reset tl when scroll out of view past bottom of screen
+  ScrollTrigger.create({
+    trigger: triggerElement,
+    start: "top bottom",
+    onLeaveBack: () => {
+      timeline.progress(0);
+      timeline.pause();
+    },
+  });
+  // Play tl when scrolled into view (60% from top of screen)
+  ScrollTrigger.create({
+    trigger: triggerElement,
+    start: "top 70%",
+    onEnter: () => timeline.play(),
+  });
+}
+
+$("[animate]").each(function (index) {
+  let tl = gsap.timeline({ paused: true });
+  tl.to($(this).children(), {
+    opacity: 1,
+    y: 0,
+    duration: 1.4,
+    ease: "power2.out",
+    stagger: { amount: 0.3 },
+  });
+  createScrollTrigger($(this), tl);
+});
