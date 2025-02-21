@@ -240,7 +240,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let openDropdown = gsap.timeline({
       paused: true,
       defaults: {
-        duration: 1,
+        duration: 1.5,
         ease: "power2.inOut",
       },
       onReverseComplete: () => {
