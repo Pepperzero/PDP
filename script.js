@@ -87,13 +87,13 @@ function initSwipers() {
           spaceBetween: 16,
           slideToClickedSlide: true,
           speed: 800,
-          breakpoints: {
-            478: {
-              centeredSlides: true,
-              slidesPerView: 1.2,
-              spaceBetween: 16,
-            },
-          },
+          // breakpoints: {
+          //   768: {
+          //     centeredSlides: true,
+          //     slidesPerView: 1.2,
+          //     spaceBetween: 16,
+          //   },
+          // },
         });
 
         // Store instance in data attribute
@@ -497,7 +497,7 @@ scrollTl.to(logo, { width: "5rem" });
 scrollTl.to(navbar, { backgroundColor: "#e0d7d0", height: "4.5rem" }, "<");
 scrollTl.to(menuLines, { autoAlpha: 0, opacity: 0 }, "<");
 scrollTl.to(payoff, { autoAlpha: 0, opacity: 0 }, "<");
-scrollTl.to($(".navbar_btn_wrap"), { marginBottom: "0rem", y: "-1rem" }, "<");
+scrollTl.to($(".navbar_btn_wrap"), { marginBottom: "0rem", y: "-0.1rem" }, "<");
 scrollTl.to(
   "html",
   {
