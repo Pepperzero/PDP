@@ -74,30 +74,44 @@ $(".cards_component").each(function (index) {
   });
 });
 
-$(".history_slider_component").each(function (index) {
-  const swiper = new Swiper($(this).find(".swiper")[0], {
-    //effect: "fade",
-    //crossFade: true,
-    slidesPerView: 1.2,
-    //initialSlide: 1,
-    //centeredSlides: true,
-    //centerInsufficientSlides: true,
-    //slideActiveClass: "is-active",
-    spaceBetween: 16,
-    slideToClickedSlide: true,
-    speed: 800,
-    //loop: true,
-    breakpoints: {
-      // when it gets bigger than 478px
-      478: {
-        centeredSlides: true,
-        slidesPerView: 1.2,
-        //initialSlide: 1,
-        //slidesPerGroup: 3,
-        spaceBetween: 16,
-      },
-    },
+// History swiper
+function initSwipers() {
+  $(".history_slider_component").each(function (index) {
+    const $this = $(this);
+    const swiperEl = $this.find(".swiper")[0];
+
+    if (window.innerWidth > 768) {
+      if (!$this.data("swiperInstance")) {
+        const swiper = new Swiper(swiperEl, {
+          slidesPerView: 1.2,
+          spaceBetween: 16,
+          slideToClickedSlide: true,
+          speed: 800,
+          breakpoints: {
+            478: {
+              centeredSlides: true,
+              slidesPerView: 1.2,
+              spaceBetween: 16,
+            },
+          },
+        });
+
+        // Store instance in data attribute
+        $this.data("swiperInstance", swiper);
+      }
+    } else {
+      if ($this.data("swiperInstance")) {
+        $this.data("swiperInstance").destroy(true, true);
+        $this.removeData("swiperInstance");
+      }
+    }
   });
+}
+
+// Initialize on page load and resize
+$(document).ready(initSwipers);
+$(window).on("resize", function () {
+  setTimeout(initSwipers, 300); // Debounce resize event
 });
 
 $(".home-slider_component").each(function (index) {
